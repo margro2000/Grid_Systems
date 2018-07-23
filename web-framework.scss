@@ -1,0 +1,154 @@
+$total_columns: 12;
+$gutter_width : 2%;
+$a: auto;
+
+//for tester, delete after
+.text-center {
+  text-align: center;
+}
+
+// the container class is the container for the column itself
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+
+//the row class places the grid system into organized columns
+.row {
+  $column_width: auto;
+  width: $column_width;
+  display: grid;
+  grid-template-columns: repeat($total_columns, 1fr); //creates 12 columns that each take up one fraction of the page
+  grid-template-rows: auto;
+  grid-gap: $gutter_width;
+}
+
+@mixin span-x-columns{
+
+}
+
+.rubric-4-desktop {
+
+}
+
+.headline-8-desktop {
+
+}
+
+.author-date-8-desktop {
+
+}
+
+//when the screen is less than 768px, specify xs colmns
+@for $a from 1 through $total-columns {
+  .col-#{xs}-#{$a} {
+  grid-column: span $a;
+}
+}
+
+//when the screen is at least 768px, specify sm columns
+@media (min-width: 768px) { //actual querries specifications can change
+  @for $a from 1 through $total-columns {
+    .col-#{sm}-#{$a} {
+    grid-column: span $a;
+  }
+  }
+}
+
+//when the screen is at least 992px, specify md columns
+@media (min-width: 992px) { //actual querries specifications can change
+  @for $a from 1 through $total-columns {
+    .col-#{md}-#{$a} {
+    grid-column: span $a;
+  }
+  }
+}
+
+//when the screen is at least 1200px, specify lg columns
+@media (min-width: 1200px) { //actual querries specifications can change
+  @for $i from 1 through $total-columns {
+    .col-#{lg}-#{$i} {
+    grid-column: span $i;
+  }
+  }
+}
+
+//set width to some fraction of a single column
+@for $i from 1 through $total_columns {
+    .col-#{$i}-#{$total_columns} {
+        width: (100% - ($total_columns/$i - 1) * $gutter_width) / $total_columns * $i;
+    }
+}
+
+//"offset" column i-offset by, b-#of columns spanned
+@for $i from 1 through $total-columns - 1 {
+  @for $b from 1 through $total_columns {
+  .offset-#{$i}-#{$b} {
+    grid-column-start: $i+1;
+    grid-column-end: $i+1+$b;
+
+  }
+    }
+}
+
+//responsive offset system
+@for $i from 1 through $total-columns - 1 {
+  @media (min-width: 1200px) { //actual querries specifications can change
+    @for $a from 1 through $total-columns {
+      .offset-#{$i}-#{lg}-#{$a} {
+        grid-column-start: $i+1;
+        grid-column-end: $i+1+$a;
+    }
+    }
+  }
+  @media (min-width: 992px) {
+      @for $a from 1 through $total-columns {
+        .offset-#{$i}-#{md}-#{$a} {
+      grid-column-start: $i+1;
+      grid-column-end: $i+1+$a;
+    }
+  }
+}
+@media (min-width: 768px) { //actual querries specifications can change
+  @for $a from 1 through $total-columns {
+    .offset-#{$i}-#{sm}-#{$a} {
+    grid-column-start: $i+1;
+    grid-column-end: $i+1+$a;
+  }
+}
+}
+@for $a from 1 through $total-columns {
+  .offset-#{$i}-#{sm}-#{$a} {
+  grid-column-start: $i+1;
+  grid-column-end: $i+1+$a;
+}
+}
+}
+
+//Create grid columns and rows that are flexible based on platform
+//(desktom, mobile, tablet) and that can be physically visible when certain mixin is called for debugging
+//allow for offsetting
+//Create classes for page aspects (start with desktop)
+//Create mixin that lets you add a fixed bar and squishes columns to the otherside
