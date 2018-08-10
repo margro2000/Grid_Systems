@@ -45,22 +45,6 @@ $a: auto;
   grid-gap: $gutter_width;
 }
 
-@mixin span-x-columns{
-
-}
-
-.rubric-4-desktop {
-
-}
-
-.headline-8-desktop {
-
-}
-
-.author-date-8-desktop {
-
-}
-
 //when the screen is less than 768px, specify xs colmns
 @for $a from 1 through $total-columns {
   .col-#{xs}-#{$a} {
@@ -146,9 +130,3 @@ $a: auto;
 }
 }
 }
-
-//Create grid columns and rows that are flexible based on platform
-//(desktom, mobile, tablet) and that can be physically visible when certain mixin is called for debugging
-//allow for offsetting
-//Create classes for page aspects (start with desktop)
-//Create mixin that lets you add a fixed bar and squishes columns to the otherside
